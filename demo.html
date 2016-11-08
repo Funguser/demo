@@ -17,6 +17,18 @@ img{border:0}
 	height:800px;
 	width: 250px;
 	top:100px;
+	left: 220px;
+	text-align: center;
+	line-height: 40px;
+}
+.youhave2{
+	position:absolute;
+	color:#fff;
+	font-weight:bold;
+	font-size: 16px;
+	height:800px;
+	width: 250px;
+	top:100px;
 	left: 20px;
 	text-align: center;
 	line-height: 40px;
@@ -25,7 +37,7 @@ img{border:0}
 	width:526px;
 	height:526px;
 	top:65px;
-	left:400px;
+	left:500px;
 	position:absolute;
 	overflow:hidden;
 }
@@ -36,13 +48,13 @@ img{border:0}
 <script type="text/javascript" src="jQueryRotate.2.1.js"></script>
 <script type="text/javascript">
 	var person = new Array();
-for(var k=0;k<8;k++)
+for(var k=0;k<7;k++)
 {
  person[k]=new Array();
 }
-person[0][0] = {Name:"Liu, Lianbo", Group:"APP-SQUAD", gender:"male"};
-person[0][1] = {Name:"Qiao, Jida", Group:"APP-SQUAD", gender:"female"};
-person[0][2] = {Name:"Xu, Qingqing", Group:"APP-SQUAD", gender:"male"};
+person[0][0] = {Name:"Liu, Lianbo", Group:"Dep.Function & APP-SQUAD", gender:"male"};
+person[0][1] = {Name:"Qiao, Jida", Group:"Dep.Function & APP-SQUAD", gender:"female"};
+person[0][2] = {Name:"Xu, Qingqing", Group:"Dep.Function & APP-SQUAD", gender:"male"};
 
 person[1][0] = {Name:"Che, Yuchi", Group:"DATA-ANALYTICS", gender:"male"};
 person[1][1] = {Name:"Chen, Wanjun", Group:"DATA-ANALYTICS", gender:"female"};
@@ -92,11 +104,11 @@ person[6][7] = {Name:"Wang, Wenchao", Group:"TELEMATICS", gender:"male"};
 person[6][8] = {Name:"Yang, Yun", Group:"TELEMATICS", gender:"female"};
 person[6][9] = {Name:"Yuan, Rui", Group:"TELEMATICS", gender:"male"};
 
-person[7][0] = {Name:"Alvarez Leyva, Carla Nora", Group:"Dep.Function", gender:"female"};
-person[7][1] = {Name:"Huang Chen", Group:"Dep.Function", gender:"male"};
-person[7][2] = {Name:"Piao, Haiyu", Group:"Dep.Function", gender:"female"};
-person[7][3] = {Name:"Ren, Wei W.", Group:"Dep.Function", gender:"female"};
-person[7][4] = {Name:"Xu, Xiaoqing", Group:"Dep.Function", gender:"female"};
+person[0][3] = {Name:"Alvarez Leyva, Carla Nora", Group:"Dep.Function & APP-SQUAD", gender:"female"};
+person[0][4] = {Name:"Huang Chen", Group:"Dep.Function & APP-SQUAD", gender:"male"};
+person[0][5] = {Name:"Piao, Haiyu", Group:"Dep.Function & APP-SQUAD", gender:"female"};
+person[0][6] = {Name:"Ren, Wei W.", Group:"Dep.Function & APP-SQUAD", gender:"female"};
+person[0][7] = {Name:"Xu, Xiaoqing", Group:"Dep.Function & APP-SQUAD", gender:"female"};
 
 function GetRandomNum(Min,Max){  
 
@@ -143,12 +155,12 @@ function generate()
     var gen = new Array;
     var reRandom1 = 0;
     var reRandom2 = 0;
-    while(reRandom1 != 8||reRandom2 < 1)
+    while(reRandom1 != 7||reRandom2 < 1)
     {
 
         reRandom1 = 0;
         reRandom2 = 0;
-        for (var i = 0; i <8; i++){
+        for (var i = 0; i <7; i++){
             var num = Math.floor(Math.random()*(person[i].length));
             gen[i] = person[i][num];
             while(!(preName.indexOf(gen[i].Name)== -1))
@@ -176,7 +188,7 @@ function generate()
     }
     var stringg = "";
 
-    for (var i = 7; i >= 0; i--) {
+    for (var i = 6; i >= 0; i--) {
         //console.log(gen[i].Name);
         //document.write("<p>"+gen[i].Name+"</p>");
 
@@ -187,6 +199,7 @@ function generate()
         	document.getElementById("demo"+i).innerHTML=gen[i].Group +"</br> <p style=\"font-weight:bold; font-size:18px; font-family: sans-serif;\">"+ gen[i].Name+"</p>";
     }
     console.log(stringg);
+    localStorage.preName = localStorage.Name;
     localStorage.Name = stringg;
     //alert(stringg);
 
@@ -241,7 +254,7 @@ $(document).ready(function(){
 	
 	
 	var roll= function(){
-		for (var i = 7; i >= 0; i--) {
+		for (var i = 6; i >= 0; i--) {
         document.getElementById("demo"+i).innerHTML="";
     }
 		$(this).unbind('mouseenter').unbind('mouseleave'); 
@@ -274,6 +287,9 @@ $(document).ready(function(){
 	    var zhuan=setInterval(function(){
 	    	    var preName = localStorage.getItem("Name");
         document.getElementById("pre").innerHTML="<p style=\"font-weight:bold; font-size:22px; font-family: sans-serif;\">Previous:</p></br>"+localStorage.Name;
+
+        document.getElementById("pre2").innerHTML="<p style=\"font-weight:bold; font-size:22px; font-family: sans-serif;\">Previous+:</p></br>"+localStorage.preName;
+
 				angle += 1;
 				$("#img").rotate(angle);
 				if(angle >= $dushu){
@@ -321,25 +337,28 @@ document.oncontextmenu=new Function("event.returnValue=false;");
 <div id="mian">
 	<div class="youhave" id="pre"><script>onStart();document.getElementById("pre").innerHTML="<p style=\"font-weight:bold; font-size:22px; font-family: sans-serif;\">Previous:</p></br>"+localStorage.Name;
 	</script></div>
+
+	<div class="youhave2" id="pre2"><script>onStart();document.getElementById("pre2").innerHTML="<p style=\"font-weight:bold; font-size:22px; font-family: sans-serif;\">Previous+:</p></br>"+localStorage.preName;
+	</script></div>
+	
 	<div id="zhuanpan" style="position:relative;text-align: center;">
-		<img id="img" src="images/four_zhuanpan.png" width="526" height="526">
+		<img id="img" src="images/zhuanpan.png" width="526" height="526">
 		<img id="tip" src="images/four1.png" width="122" height="187">
 		
-		<div style="position:absolute; width:140px; height:50px; left:200px; top:45px; line-height: 25px"><p id=demo0></p></div>
+		<div style="position:absolute; width:140px; height:50px; left:145px; top:65px; line-height: 25px"><p id=demo0></p></div>
 
-		<div style="position:absolute; width:140px; height:50px; left:330px; top:110px; line-height: 25px"><p id=demo1></p></div>
+		<div style="position:absolute; width:140px; height:50px; left:285px; top:100px; line-height: 25px"><p id=demo1></p></div>
 
-		<div style="position:absolute; width:140px; height:50px; left:380px; top:235px; line-height: 25px"><p id=demo2></p></div>
+		<div style="position:absolute; width:140px; height:50px; left:350px; top:230px; line-height: 25px"><p id=demo2></p></div>
 								
-		<div style="position:absolute; width:140px; height:50px; left:330px; top:355px; line-height: 25px"><p id=demo3></p></div>
+		<div style="position:absolute; width:160px; height:50px; left:305px; top:350px; line-height: 25px"><p id=demo3></p></div>
 		
-		<div style="position:absolute; width:140px; height:50px; left:195px; top:410px; line-height: 25px"><p id=demo4></p></div>
+		<div style="position:absolute; width:140px; height:50px; left:175px; top:380px; line-height: 25px"><p id=demo4></p></div>
 		
-		<div style="position:absolute; width:140px; height:50px; left:65px; top:355px; line-height: 25px"><p id=demo5></p></div>
+		<div style="position:absolute; width:140px; height:50px; left:65px; top:310px; line-height: 25px"><p id=demo5></p></div>
 		
-		<div style="position:absolute; width:140px; height:50px; left:20px; top:235px; line-height: 25px"><p id=demo6></p></div>
+		<div style="position:absolute; width:140px; height:50px; left:50px; top:185px; line-height: 25px"><p id=demo6></p></div>
 		
-		<div style="position:absolute; width:140px; height:50px; left:65px; top:110px; line-height: 25px"><p id=demo7></p></div>
 
 	</div>
 
