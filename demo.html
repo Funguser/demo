@@ -199,6 +199,15 @@ function generate()
         	document.getElementById("demo"+i).innerHTML=gen[i].Group +"</br> <p style=\"font-weight:bold; font-size:18px; font-family: sans-serif;\">"+ gen[i].Name+"</p>";
     }
     console.log(stringg);
+    localStorage.preName_10 = localStorage.preName_9;
+    localStorage.preName_9 = localStorage.preName_8;
+    localStorage.preName_8 = localStorage.preName_7;
+    localStorage.preName_7 = localStorage.preName_6;
+    localStorage.preName_6 = localStorage.preName_5;
+    localStorage.preName_5 = localStorage.preName_4;
+    localStorage.preName_4 = localStorage.preName_3;
+    localStorage.preName_3 = localStorage.preName_2;
+    localStorage.preName_2 = localStorage.preName;
     localStorage.preName = localStorage.Name;
     localStorage.Name = stringg;
     //alert(stringg);
@@ -329,6 +338,37 @@ $(document).ready(function(){
 });
 document.onselectstart=new Function("event.returnValue=false;");
 document.oncontextmenu=new Function("event.returnValue=false;");
+
+function clear_storage()
+{
+	localStorage.clear();
+	document.getElementById("pre").innerHTML="<p style=\"font-weight:bold; font-size:22px; font-family: sans-serif;\">Previous:</p></br>"+localStorage.Name;
+	document.getElementById("pre2").innerHTML="<p style=\"font-weight:bold; font-size:22px; font-family: sans-serif;\">Previous+:</p></br>"+localStorage.preName;
+}
+
+function back_storage()
+{
+	
+    localStorage.Name = localStorage.preName;
+    localStorage.preName = localStorage.preName_2;
+    localStorage.preName_2 = localStorage.preName_3;
+    localStorage.preName_3 = localStorage.preName_4;
+    localStorage.preName_4 = localStorage.preName_5;
+    localStorage.preName_5 = localStorage.preName_6;
+    localStorage.preName_6 = localStorage.preName_7;
+    localStorage.preName_7 = localStorage.preName_8;
+    localStorage.preName_8 = localStorage.preName_9;
+    localStorage.preName_9 = localStorage.preName_10;
+    localStorage.preName_10 = "undefined";
+
+	document.getElementById("pre").innerHTML="<p style=\"font-weight:bold; font-size:22px; font-family: sans-serif;\">Previous:</p></br>"+localStorage.Name;
+	document.getElementById("pre2").innerHTML="<p style=\"font-weight:bold; font-size:22px; font-family: sans-serif;\">Previous+:</p></br>"+localStorage.preName;
+
+	for (var i = 6; i >= 0; i--) {
+        	document.getElementById("demo"+i).innerHTML="</br> <p style=\"font-weight:bold; font-size:18px; font-family: sans-serif;\">"+ ""+"</p>";
+    }
+}
+
 </script>
 
 </head>
@@ -339,8 +379,11 @@ document.oncontextmenu=new Function("event.returnValue=false;");
 	</script></div>
 
 	<div class="youhave2" id="pre2"><script>onStart();document.getElementById("pre2").innerHTML="<p style=\"font-weight:bold; font-size:22px; font-family: sans-serif;\">Previous+:</p></br>"+localStorage.preName;
-	</script></div>
-	
+	</script>
+		
+	</div>
+	<button onclick="clear_storage()">reset</button>
+	<button onclick="back_storage()">back to previous</button>
 	<div id="zhuanpan" style="position:relative;text-align: center;">
 		<img id="img" src="images/zhuanpan.png" width="526" height="526">
 		<img id="tip" src="images/four1.png" width="122" height="187">
@@ -361,6 +404,7 @@ document.oncontextmenu=new Function("event.returnValue=false;");
 		
 
 	</div>
+
 
 </div>
 
