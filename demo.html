@@ -341,14 +341,23 @@ document.oncontextmenu=new Function("event.returnValue=false;");
 
 function clear_storage()
 {
+	if(confirm("This will wipe all the data and cannot undo!"))
+	{
 	localStorage.clear();
 	document.getElementById("pre").innerHTML="<p style=\"font-weight:bold; font-size:22px; font-family: sans-serif;\">Previous:</p></br>"+localStorage.Name;
 	document.getElementById("pre2").innerHTML="<p style=\"font-weight:bold; font-size:22px; font-family: sans-serif;\">Previous+:</p></br>"+localStorage.preName;
+	for (var i = 6; i >= 0; i--) {
+        document.getElementById("demo"+i).innerHTML="</br> <p style=\"font-weight:bold; font-size:18px; font-family: sans-serif;\">"+ ""+"</p>";
+    }
+	}
+	else
+		return false;
 }
 
 function back_storage()
 {
-	
+	if(confirm("This will turn back to previous result and cannot undo! If you only want to reset the result of this turn, please only click this button once."))
+	{
     localStorage.Name = localStorage.preName;
     localStorage.preName = localStorage.preName_2;
     localStorage.preName_2 = localStorage.preName_3;
@@ -367,6 +376,7 @@ function back_storage()
 	for (var i = 6; i >= 0; i--) {
         	document.getElementById("demo"+i).innerHTML="</br> <p style=\"font-weight:bold; font-size:18px; font-family: sans-serif;\">"+ ""+"</p>";
     }
+	}
 }
 
 </script>
@@ -384,6 +394,8 @@ function back_storage()
 	</div>
 	<button onclick="clear_storage()">reset</button>
 	<button onclick="back_storage()">back to previous</button>
+
+
 	<div id="zhuanpan" style="position:relative;text-align: center;">
 		<img id="img" src="images/zhuanpan.png" width="526" height="526">
 		<img id="tip" src="images/four1.png" width="122" height="187">
